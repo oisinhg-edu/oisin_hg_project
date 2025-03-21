@@ -1,0 +1,106 @@
+<?php
+require_once "etc/config.php";
+require_once "etc/global.php";
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+$authors = Author::findAll();
+$locations = Location::findAll();
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="css/all.min.css">
+    <link rel="stylesheet" href="css/reset.css">
+    <link rel="stylesheet" href="css/grid.css">
+    <link rel="stylesheet" href="css/story_create.css">
+    <link rel="stylesheet" href="css/navbar.css">
+
+    <script defer src="script/myScript.js"></script>
+
+    <title>Story Entry</title>
+</head>
+
+<body>
+    <?php require_once "./etc/navbar.php"; ?>
+
+    <div class="container">
+        <div class="content width-12">
+            <h2>Story Entry Form</h2>
+            <form action="story_store.php" method="POST" enctype="multipart/form-data">
+                <p>
+                    Title:
+                    <input type="text" name="headline" value="<?= old('headline') ?>">
+
+                </p>
+                <span class="error"><?= error('headline') ?></span>
+
+                <p id="articleText">
+                    Article:
+                    <textarea name="article"><?= old('article') ?></textarea>
+
+                </p>
+                <span class="error"><?= error('article') ?></span>
+                <p>
+                    Image:
+                    <input type="file" name="fileToUpload" id="fileToUpload">
+                </p>
+                <p>
+                    Author:
+                    <select name="author_id">
+                        <option value="">Please choose the author...</option>
+                        <?php foreach ($authors as $author): ?>
+                            <option value=<?= $author->id ?>     
+                                <?= chosen("author_id", $author->id) ? "selected" : ""; ?>> 
+                                <?= $author->first_name ?> <?= $author->last_name ?>
+                            </option>
+                        <?php endforeach; ?>
+                    </select>
+                </p>
+                <span class="error"><?= error('author_id') ?></span>
+                <p>
+                    Category:
+                    <select name="category_id">
+                        <option value="">Please choose the category...</option>
+                        <?php foreach ($categories as $category): ?>
+                            <option value=<?= $category->id ?>     <?= chosen("category_id", $category->id) ? "selected" : ""; ?>>
+                                <?= $category->name ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </p>
+                <span class="error"><?= error('category_id') ?></span>
+                <p>
+                    Location:
+                    <select name="location_id">
+                        <option value="">Please choose the location...</option>
+                        <?php foreach ($locations as $location): ?>
+                            <option value=<?= $location->id ?>     <?= chosen("location_id", $location->id) ? "selected" : ""; ?>>
+                                <?= $location->name ?></option>
+                        <?php endforeach; ?>
+                    </select>
+                </p>
+                <span class="error"><?= error('location_id') ?></span>
+                <p>
+                    <a href="index.php"><button type="button">Cancel</button></a>
+                    <button type="submit">Submit</button>
+                </p>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<?php
+if (array_key_exists("form-data", $_SESSION)) {
+    unset($_SESSION["form-data"]);
+}
+if (array_key_exists("form-errors", $_SESSION)) {
+    unset($_SESSION["form-errors"]);
+}
+?>

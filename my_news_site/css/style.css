@@ -1,0 +1,42 @@
+body {
+    background-color: #ffff;
+}
+
+.category {
+    background-color: #8B0000;
+    color: #ffff;
+    text-transform: uppercase;
+    padding: 3px 10px;
+    position: absolute;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+.rows {
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    position: relative;
+}
+
+.edit {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+.edit button {
+    padding: 5px 15px;
+    background-color: #dbdbdb;
+    color: #000000;
+    border: 2px solid #000000;
+    border-radius: 8px;
+    transition: 0.2s;
+}
+
+.edit button:hover {
+    background-color: #bcbcbc;
+    cursor: pointer;
+}
