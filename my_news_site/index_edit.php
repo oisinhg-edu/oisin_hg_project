@@ -51,7 +51,7 @@ try {
     <link rel="stylesheet" href="css/fonts.css">
 
     <script defer src="script/myScript.js"></script>
-    
+
 </head>
 
 <body>
@@ -77,7 +77,13 @@ try {
                         <p class="date space-mono-bold"><?= $largeStory->created_at ?></p>
                     </div>
                 </div>
-                <a href="story_edit.php?id=<?= $largeStory->id ?>" class="edit"><button class="btn-edit">Edit</button></a>
+                <span id="actions">
+                    <a href="story_edit.php?id=<?= $largeStory->id ?>" class="edit"><button class="action-btn">Edit</button></a>
+                    <form class="story-delete" action="story_delete.php" method="POST">
+                        <input type="hidden" name="id" value="<?= $largeStory->id ?>">
+                        <input class="action-btn" type="submit" value="Delete">
+                    </form>
+                </span>
             </div>
         </div>
 
@@ -97,7 +103,13 @@ try {
                     <div class="imageSection">
                         <img src="images/<?= $s->img_url ?>">
                     </div>
-                    <a href="story_edit.php?id=<?= $s->id ?>" class="edit"><button class="btn-edit">Edit</button></a>
+                    <span id="actions">
+                        <a href="story_edit.php?id=<?= $s->id ?>" class="edit"><button class="action-btn">Edit</button></a>
+                        <form class="story-delete" action="story_delete.php" method="POST">
+                            <input type="hidden" name="id" value="<?= $s->id ?>">
+                            <input class="action-btn" type="submit" value="Delete">
+                        </form>
+                    </span>
                 </div>
             <?php } ?> <!-- end php -->
         </div>
@@ -125,7 +137,13 @@ try {
                     </p>
                     <p class="date space-mono-bold"><?= $s->created_at ?></p>
                 </div>
-                <a href="story_edit.php?id=<?= $s->id ?>" class="edit"><button>Edit</button></a>
+                <span id="actions">
+                    <a href="story_edit.php?id=<?= $s->id ?>" class="edit"><button class="action-btn">Edit</button></a>
+                    <form class="story-delete" action="story_delete.php" method="POST">
+                        <input type="hidden" name="id" value="<?= $s->id ?>">
+                        <input class="action-btn" type="submit" value="Delete">
+                    </form>
+                </span>
             </div>
         <?php } ?> <!-- end php -->
     </div> <!-- end row 2 -->

@@ -33,7 +33,7 @@ try {
 
         $story->save();
 
-        redirect('index_edit.php');
+        redirect('index.php');
     } else {
         $errors = $validator->errors();
 

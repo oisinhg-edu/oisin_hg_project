@@ -1,6 +1,6 @@
 <?php
-require_once "etc/config.php";
-require_once "etc/global.php";
+require_once "./etc/config.php";
+require_once "./etc/global.php";
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
@@ -45,7 +45,7 @@ try {
 </head>
 
 <body>
-    <?php require_once "./etc/navbar.php"; ?>
+    <?php require_once "etc/navbar.php"; ?>
 
     <div class="container">
         <div class="content width-12">

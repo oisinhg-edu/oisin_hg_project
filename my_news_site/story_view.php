@@ -1,5 +1,5 @@
 <?php
-require_once "./etc/config.php";
+require_once "etc/config.php";
 
 try {
     if (!isset($_GET["id"])) {
@@ -23,8 +23,8 @@ catch (Exception $e) {
         <title>Story</title>
     </head>
     <body>
-        <?php require_once "./etc/navbar.php"; ?>
-        <?php require_once "./etc/flash_message.php"; ?>
+        <?php require_once "etc/navbar.php"; ?>
+        <?php require_once "etc/flash_message.php"; ?>
         <div>
             <h1><?= $s->headline ?></h1>
             <div>
@@ -42,7 +42,7 @@ catch (Exception $e) {
             <?php foreach ($related_stories as $rs) { ?>
                 <?php if ($rs->id == $s->id) { continue; } ?>
                 <div>
-                    <h3><a href="view_story.php?id=<?= $rs->id ?>"><?= $rs->headline ?></a></h3>
+                    <h3><a href="story_view.php?id=<?= $rs->id ?>"><?= $rs->headline ?></a></h3>
                     <p>Author: <?= Author::findById($rs->author_id)->first_name . " " . Author::findById($rs->author_id)->last_name ?></p>
                     <!-- <p>Category: <?= Category::findById($rs->category_id)->name ?></p> -->
                     <!-- <p>Location: <?= Location::findById($rs->location_id)->name ?></p> -->

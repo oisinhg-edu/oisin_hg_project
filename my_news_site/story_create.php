@@ -29,7 +29,7 @@ $locations = Location::findAll();
 </head>
 
 <body>
-    <?php require_once "./etc/navbar.php"; ?>
+    <?php require_once "etc/navbar.php"; ?>
 
     <div class="container">
         <div class="content width-12">

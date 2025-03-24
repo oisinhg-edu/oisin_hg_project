@@ -61,7 +61,7 @@ try {
 
     <!-- row 1 -->
     <div class="container">
-        <div class="width-7 largeStory" onclick="location.href='view_story.php?id=<?= $largeStory->id ?>';">
+        <div class="width-7 largeStory" onclick="location.href='story_view.php?id=<?= $largeStory->id ?>';">
             <img src="assets/images/<?= $largeStory->img_url ?>">
 
             <div class="contentDiv">
@@ -88,7 +88,7 @@ try {
             <?php foreach ($horizontal_stories as $key => $s) { ?>
 
 
-                <div class="width-5 horizStory" onclick="location.href='view_story.php?id=<?= $s->id ?>';">
+                <div class="width-5 horizStory" onclick="location.href='story_view.php?id=<?= $s->id ?>';">
                     <span class="category space-mono-bold"><?= Category::findById($s->category_id)->name ?></span>
                     <div class="content">
                         <h3 class="title lato-black"><?= $s->headline ?></h3>
@@ -109,7 +109,7 @@ try {
     <!-- row 2 -->
     <div class="container">
         <?php foreach ($stories as $s) { ?>
-            <div class="width-3 mediumStory" onclick="location.href='view_story.php?id=<?= $s->id ?>';">
+            <div class="width-3 mediumStory" onclick="location.href='story_view.php?id=<?= $s->id ?>';">
                 <div>
                     <img src="assets/images/<?= $s->img_url ?>" />
 
