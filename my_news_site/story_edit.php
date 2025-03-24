@@ -2,15 +2,31 @@
 require_once "etc/config.php";
 require_once "etc/global.php";
 
-date_default_timezone_set("Europe/Dublin");
-
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-$authors = Author::findAll();
-$locations = Location::findAll();
+try {
+    if ($_SERVER["REQUEST_METHOD"] !== "GET") {
+        throw new Exception("Invalid request method");
+    }
+    if (!array_key_exists("id", $_GET)) {
+        throw new Exception("Invalid request parameters");
+    }
 
+    $id = $_GET["id"];
+    $story = Story::findById($id);
+
+    if ($story === null) {
+        throw new Exception("Story not found");
+    }
+
+    $authors = Author::findAll();
+    $locations = Location::findAll();
+} catch (Exception $ex) {
+    echo $ex->getMessage();
+    exit();
+}
 ?>
 
 <!DOCTYPE html>
@@ -25,7 +41,7 @@ $locations = Location::findAll();
 
     <script defer src="script/myScript.js"></script>
 
-    <title>Story Entry</title>
+    <title>Story Edit</title>
 </head>
 
 <body>
@@ -33,30 +49,32 @@ $locations = Location::findAll();
 
     <div class="container">
         <div class="content width-12">
-            <h2>Story Entry Form</h2>
-            <form action="story_store.php" method="POST" enctype="multipart/form-data">
+            <h2>Story Edit Form</h2>
+            <form action="story_update.php" method="POST">
+                <input type="hidden" name="id" value="<?= $story->id ?>">
                 <p>
                     Headline:
-                    <input type="text" name="headline" value="<?= old('headline') ?>">
+                    <input type="text" name="headline" value="<?= old('headline', $story->headline) ?>">
                 </p>
                 <span class="error"><?= error('headline') ?></span>
 
                 <p>
                     Short Headline:
-                    <input type="text" name="short_headline" value="<?= old('short_headline') ?>">
+                    <input type="text" name="short_headline"
+                        value="<?= old('short_headline', $story->short_headline) ?>">
                 </p>
                 <span class="error"><?= error('short_headline') ?></span>
 
                 <p id="articleText">
                     Article:
-                    <textarea name="article"><?= old('article') ?></textarea>
+                    <textarea name="article"><?= old('article', $story->article) ?></textarea>
                 </p>
                 <span class="error"><?= error('article') ?></span>
 
                 <p>
                     Image URL:
                     <!-- <input type="file" name="fileToUpload" id="fileToUpload"> -->
-                    <input type="text" name="img_url" value="<?= old('img_url')?>">
+                    <input type="text" name="img_url" value="<?= old('img_url', $story->img_url) ?>">
                 </p>
                 <span class="error"><?= error('img_url') ?></span>
 
@@ -65,9 +83,8 @@ $locations = Location::findAll();
                     <select name="author_id">
                         <option value="">Please choose the author...</option>
                         <?php foreach ($authors as $author): ?>
-                            <option value=<?= $author->id ?>     
-                                <?= chosen("author_id", $author->id) ? "selected" : ""; ?>> 
-                                <?= $author->first_name ?> <?= $author->last_name ?>
+                            <option value=<?= $author->id ?>     <?= chosen("author_id", $author->id, $story->author_id) ? "selected" : ""; ?>>
+                                <?= $author->first_name ?>     <?= $author->last_name ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
@@ -79,7 +96,7 @@ $locations = Location::findAll();
                     <select name="category_id">
                         <option value="">Please choose the category...</option>
                         <?php foreach ($categories as $category): ?>
-                            <option value=<?= $category->id ?>     <?= chosen("category_id", $category->id) ? "selected" : ""; ?>>
+                            <option value=<?= $category->id ?>     <?= chosen("category_id", $category->id, $story->category_id) ? "selected" : ""; ?>>
                                 <?= $category->name ?></option>
                         <?php endforeach; ?>
                     </select>
@@ -91,20 +108,17 @@ $locations = Location::findAll();
                     <select name="location_id">
                         <option value="">Please choose the location...</option>
                         <?php foreach ($locations as $location): ?>
-                            <option value=<?= $location->id ?>     <?= chosen("location_id", $location->id) ? "selected" : ""; ?>>
+                            <option value=<?= $location->id ?>     <?= chosen("location_id", $location->id, $story->location_id) ? "selected" : ""; ?>>
                                 <?= $location->name ?></option>
                         <?php endforeach; ?>
                     </select>
                 </p>
                 <span class="error"><?= error('location_id') ?></span>
-                
+
                 <span class="error"><?= error('created_at') ?></span>
 
-                <input type="hidden" name="created_at" value="<?= date("Y-m-d H:i:s") ?>">
-                <input type="hidden" name="updated_at" value="<?= date("Y-m-d H:i:s") ?>">
-
                 <p id="control-btns">
-                    <a href="index.php"><button type="button">Cancel</button></a>
+                    <a href="index_edit.php"><button type="button">Cancel</button></a>
                     <button type="submit">Submit</button>
                 </p>
             </form>

@@ -1,5 +1,7 @@
 <?php
 
+date_default_timezone_set("Europe/Dublin");
+
 class Story
 {
 
@@ -64,12 +66,13 @@ class Story
             } else {
                 $sql = "UPDATE stories SET " .
                     "headline    = :headline, " .
-                    "short_headline = :short_headline" .
+                    "short_headline = :short_headline, " .
                     "article     = :article, " .
                     "img_url     = :img_url, " .
                     "author_id   = :author_id, " .
                     "category_id = :category_id, " .
                     "location_id = :location_id, " .
+                    "created_at = :created_at," .
                     "updated_at  = :updated_at " .
                     "WHERE id = :id";
 
