@@ -17,6 +17,12 @@ $locations = Location::findAll();
 <html lang="en">
 
 <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+        
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/grid.css">
@@ -56,7 +62,7 @@ $locations = Location::findAll();
                 <p>
                     Image URL:
                     <!-- <input type="file" name="fileToUpload" id="fileToUpload"> -->
-                    <input type="text" name="img_url" value="<?= old('img_url')?>">
+                    <input type="text" name="img_url" value="<?= old('img_url') ?>">
                 </p>
                 <span class="error"><?= error('img_url') ?></span>
 
@@ -65,9 +71,8 @@ $locations = Location::findAll();
                     <select name="author_id">
                         <option value="">Please choose the author...</option>
                         <?php foreach ($authors as $author): ?>
-                            <option value=<?= $author->id ?>     
-                                <?= chosen("author_id", $author->id) ? "selected" : ""; ?>> 
-                                <?= $author->first_name ?> <?= $author->last_name ?>
+                            <option value=<?= $author->id ?>     <?= chosen("author_id", $author->id) ? "selected" : ""; ?>>
+                                <?= $author->first_name ?>     <?= $author->last_name ?>
                             </option>
                         <?php endforeach; ?>
                     </select>
@@ -97,7 +102,7 @@ $locations = Location::findAll();
                     </select>
                 </p>
                 <span class="error"><?= error('location_id') ?></span>
-                
+
                 <span class="error"><?= error('created_at') ?></span>
 
                 <input type="hidden" name="created_at" value="<?= date("Y-m-d H:i:s") ?>">

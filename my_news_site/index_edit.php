@@ -48,6 +48,7 @@ try {
     <link rel="stylesheet" href="css/horizStory.css">
     <link rel="stylesheet" href="css/largeStory.css">
     <link rel="stylesheet" href="css/navbar.css">
+    <link rel="stylesheet" href="css/edit.css">
     <link rel="stylesheet" href="css/fonts.css">
 
     <script defer src="script/myScript.js"></script>
@@ -81,7 +82,7 @@ try {
                     <a href="story_edit.php?id=<?= $largeStory->id ?>" class="edit"><button class="action-btn">Edit</button></a>
                     <form class="story-delete" action="story_delete.php" method="POST">
                         <input type="hidden" name="id" value="<?= $largeStory->id ?>">
-                        <input class="action-btn" type="submit" value="Delete">
+                        <input class="action-btn" id="delete-btn" type="submit" value="Delete">
                     </form>
                 </span>
             </div>
@@ -107,7 +108,7 @@ try {
                         <a href="story_edit.php?id=<?= $s->id ?>" class="edit"><button class="action-btn">Edit</button></a>
                         <form class="story-delete" action="story_delete.php" method="POST">
                             <input type="hidden" name="id" value="<?= $s->id ?>">
-                            <input class="action-btn" type="submit" value="Delete">
+                            <input class="action-btn" type="submit" id="delete-btn" value="Delete">
                         </form>
                     </span>
                 </div>
@@ -141,7 +142,7 @@ try {
                     <a href="story_edit.php?id=<?= $s->id ?>" class="edit"><button class="action-btn">Edit</button></a>
                     <form class="story-delete" action="story_delete.php" method="POST">
                         <input type="hidden" name="id" value="<?= $s->id ?>">
-                        <input class="action-btn" type="submit" value="Delete">
+                        <input class="action-btn" id="delete-btn" type="submit" value="Delete">
                     </form>
                 </span>
             </div>
