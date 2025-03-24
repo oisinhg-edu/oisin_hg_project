@@ -61,7 +61,7 @@ try {
     <!-- row 1 -->
     <div class="container">
         <div class="width-7 largeStory" onclick="location.href='view_story.php?id=<?= $largeStory->id ?>';">
-            <img src="<?= $largeStory->img_url ?>">
+            <img src="images/<?= $largeStory->img_url ?>">
 
             <div class="contentDiv">
                 <span class="category space-mono-bold"><?= Category::findById($largeStory->category_id)->name ?></span>
@@ -95,7 +95,7 @@ try {
                     </div>
 
                     <div class="imageSection">
-                        <img src="<?= $s->img_url ?>">
+                        <img src="images/<?= $s->img_url ?>">
                     </div>
                     <a href="story_edit.php?id=<?= $s->id ?>" class="edit"><button class="btn-edit">Edit</button></a>
                 </div>
@@ -108,7 +108,7 @@ try {
         <?php foreach ($stories as $s) { ?>
             <div class="width-3 mediumStory" onclick="location.href='view_story.php?id=<?= $s->id ?>';">
                 <div>
-                    <img src="<?= $s->img_url ?>" />
+                    <img src="images/<?= $s->img_url ?>" />
 
                     <div class="content">
                         <h3 class="title lato-black"><?= $s->headline ?></h3>

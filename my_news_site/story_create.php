@@ -2,6 +2,8 @@
 require_once "etc/config.php";
 require_once "etc/global.php";
 
+date_default_timezone_set("Europe/Dublin");
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -34,22 +36,30 @@ $locations = Location::findAll();
             <h2>Story Entry Form</h2>
             <form action="story_store.php" method="POST" enctype="multipart/form-data">
                 <p>
-                    Title:
+                    Headline:
                     <input type="text" name="headline" value="<?= old('headline') ?>">
-
                 </p>
                 <span class="error"><?= error('headline') ?></span>
+
+                <p>
+                    Short Headline:
+                    <input type="text" name="short_headline" value="<?= old('short_headline') ?>">
+                </p>
+                <span class="error"><?= error('short_headline') ?></span>
 
                 <p id="articleText">
                     Article:
                     <textarea name="article"><?= old('article') ?></textarea>
-
                 </p>
                 <span class="error"><?= error('article') ?></span>
+
                 <p>
-                    Image:
-                    <input type="file" name="fileToUpload" id="fileToUpload">
+                    Image URL:
+                    <!-- <input type="file" name="fileToUpload" id="fileToUpload"> -->
+                    <input type="text" name="img_url" value="<?= old('img_url')?>">
                 </p>
+                <span class="error"><?= error('img_url') ?></span>
+
                 <p>
                     Author:
                     <select name="author_id">
@@ -63,6 +73,7 @@ $locations = Location::findAll();
                     </select>
                 </p>
                 <span class="error"><?= error('author_id') ?></span>
+
                 <p>
                     Category:
                     <select name="category_id">
@@ -74,6 +85,7 @@ $locations = Location::findAll();
                     </select>
                 </p>
                 <span class="error"><?= error('category_id') ?></span>
+
                 <p>
                     Location:
                     <select name="location_id">
@@ -85,7 +97,13 @@ $locations = Location::findAll();
                     </select>
                 </p>
                 <span class="error"><?= error('location_id') ?></span>
-                <p>
+                
+                <span class="error"><?= error('created_at') ?></span>
+
+                <input type="hidden" name="created_at" value="<?= date("Y-m-d") ?> <?= date("H:i:s")?>">
+                <input type="hidden" name="updated_at" value="<?= date("Y-m-d") ?> <?= date("H:i:s")?>">
+
+                <p id="control-btns">
                     <a href="index.php"><button type="button">Cancel</button></a>
                     <button type="submit">Submit</button>
                 </p>
