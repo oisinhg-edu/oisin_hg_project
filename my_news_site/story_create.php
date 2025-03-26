@@ -22,14 +22,14 @@ $locations = Location::findAll();
     <link
         href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
-        
+
     <link rel="stylesheet" href="css/all.min.css">
     <link rel="stylesheet" href="css/reset.css">
     <link rel="stylesheet" href="css/grid.css">
     <link rel="stylesheet" href="css/story_create.css">
     <link rel="stylesheet" href="css/navbar.css">
 
-    <script defer src="script/myScript.js"></script>
+    <script defer src="js/app.js"></script>
 
     <title>Story Entry</title>
 </head>
@@ -71,7 +71,7 @@ $locations = Location::findAll();
                     <select name="author_id">
                         <option value="">Please choose the author...</option>
                         <?php foreach ($authors as $author): ?>
-                            <option value=<?= $author->id ?>     <?= chosen("author_id", $author->id) ? "selected" : ""; ?>>
+                            <option id="author-option" value=<?= $author->id ?>     <?= chosen("author_id", $author->id) ? "selected" : ""; ?>>
                                 <?= $author->first_name ?>     <?= $author->last_name ?>
                             </option>
                         <?php endforeach; ?>

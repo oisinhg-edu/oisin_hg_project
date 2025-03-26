@@ -46,7 +46,7 @@ try {
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/fonts.css">
 
-    <script defer src="script/myScript.js"></script>
+    <script defer src="js/app.js"></script>
 
     <title>Story Edit</title>
 </head>

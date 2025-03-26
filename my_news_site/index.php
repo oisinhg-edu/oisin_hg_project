@@ -51,7 +51,7 @@ try {
     <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/fonts.css">
 
-    <script defer src="script/myScript.js"></script>
+    <script defer src="js/app.js"></script>
 
 </head>
 

@@ -49,9 +49,10 @@ try {
     <link rel="stylesheet" href="css/largeStory.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/edit.css">
+    <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/fonts.css">
 
-    <script defer src="script/myScript.js"></script>
+    <script defer src="js/app.js"></script>
 
 </head>
 
@@ -61,7 +62,7 @@ try {
 
     <!-- row 1 -->
     <div class="container">
-        <div class="width-7 largeStory" onclick="location.href='view_story.php?id=<?= $largeStory->id ?>';">
+        <div class="width-7 largeStory">
             <img src="images/<?= $largeStory->img_url ?>">
 
             <div class="contentDiv">
@@ -79,7 +80,8 @@ try {
                     </div>
                 </div>
                 <span id="actions">
-                    <a href="story_edit.php?id=<?= $largeStory->id ?>" class="edit"><button class="action-btn">Edit</button></a>
+                    <a href="story_edit.php?id=<?= $largeStory->id ?>" class="edit"><button
+                            class="action-btn">Edit</button></a>
                     <form class="story-delete" action="story_delete.php" method="POST">
                         <input type="hidden" name="id" value="<?= $largeStory->id ?>">
                         <input class="action-btn" id="delete-btn" type="submit" value="Delete">
@@ -91,8 +93,7 @@ try {
         <div class="width-5 vertical_box">
             <?php foreach ($horizontal_stories as $key => $s) { ?>
 
-
-                <div class="width-5 horizStory" onclick="location.href='view_story.php?id=<?= $s->id ?>';">
+                <div class="width-5 horizStory">
                     <span class="category space-mono-bold"><?= Category::findById($s->category_id)->name ?></span>
                     <div class="content">
                         <h3 class="title lato-black"><?= $s->headline ?></h3>
@@ -106,9 +107,9 @@ try {
                     </div>
                     <span id="actions">
                         <a href="story_edit.php?id=<?= $s->id ?>" class="edit"><button class="action-btn">Edit</button></a>
-                        <form class="story-delete" action="story_delete.php" method="POST">
+                        <form class="story-delete" method="POST">
                             <input type="hidden" name="id" value="<?= $s->id ?>">
-                            <input class="action-btn" type="submit" id="delete-btn" value="Delete">
+                            <input class="action-btn" type="button" id="delete-btn" value="Delete">
                         </form>
                     </span>
                 </div>
@@ -119,7 +120,7 @@ try {
     <!-- row 2 -->
     <div class="container">
         <?php foreach ($stories as $s) { ?>
-            <div class="width-3 mediumStory" onclick="location.href='view_story.php?id=<?= $s->id ?>';">
+            <div class="width-3 mediumStory">
                 <div>
                     <img src="images/<?= $s->img_url ?>" />
 
@@ -148,6 +149,17 @@ try {
             </div>
         <?php } ?> <!-- end php -->
     </div> <!-- end row 2 -->
+
+    <!-- confirmation box-->
+    <div id="confirm" class="modal">
+        <div class="modal-content">
+            <p>Are you sure you want to delete this story?</p>
+            <span>
+                <button id="modal-cancel">Cancel</button>
+                <button id="modal-delete">Delete</button>
+            </span>
+        </div>
+    </div>
 </body>
 
 </html>
