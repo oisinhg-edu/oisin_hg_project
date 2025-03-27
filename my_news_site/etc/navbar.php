@@ -17,7 +17,7 @@ try {
             <?php } ?>
 
             <div class="dropdown">
-                <li><button id="dropbtn" onclick="toggle()">Admin</button>
+                <li><button id="dropbtn">Admin</button>
                 </li>
 
                 <div class="dropdown-content">

@@ -22,8 +22,8 @@ try {
     // $stories = Story::findByLocation($locationId);
     // $stories = Story::findByLocation($locationId, $options = array('limit' => 3));
     $stories = Story::findByLocation($locationId, $options = array('limit' => 4, 'offset' => 0));
+    $largeStory = Story::findById(15);
 
-    $largeStory = Story::findById(1);
 } catch (Exception $e) {
     echo $e->getMessage();
     exit();
@@ -92,7 +92,6 @@ try {
 
         <div class="width-5 vertical_box">
             <?php foreach ($horizontal_stories as $key => $s) { ?>
-
                 <div class="width-5 horizStory">
                     <span class="category space-mono-bold"><?= Category::findById($s->category_id)->name ?></span>
                     <div class="content">
@@ -107,10 +106,7 @@ try {
                     </div>
                     <span id="actions">
                         <a href="story_edit.php?id=<?= $s->id ?>" class="edit"><button class="action-btn">Edit</button></a>
-                        <form class="story-delete" method="POST">
-                            <input type="hidden" name="id" value="<?= $s->id ?>">
-                            <input class="action-btn" type="button" id="delete-btn" value="Delete">
-                        </form>
+                        <button class='action-btn' id="delete-btn" data-id="<?=$s->id?>">Delete</button>
                     </span>
                 </div>
             <?php } ?> <!-- end php -->
@@ -154,10 +150,11 @@ try {
     <div id="confirm" class="modal">
         <div class="modal-content">
             <p>Are you sure you want to delete this story?</p>
-            <span>
-                <button id="modal-cancel">Cancel</button>
-                <button id="modal-delete">Delete</button>
-            </span>
+
+            <button id="modal-cancel">Cancel</button>
+            <form class="story-delete" action="story_delete.php" method="POST">
+                <input type="button" id="modal-delete" value="Delete">
+            </form>
         </div>
     </div>
 </body>

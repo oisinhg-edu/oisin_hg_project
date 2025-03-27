@@ -20,7 +20,7 @@ try {
 
     $story->delete();
 
-    redirect("index-edit.php");
+    redirect("index_edit.php");
 }
 catch (Exception $ex) {
     echo $ex->getMessage();

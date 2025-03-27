@@ -14,17 +14,25 @@ document.addEventListener("click", e => {
 // MODAL
 // Get the modal
 let modal = document.querySelector("#confirm");
-
-// Get the button that opens the modal
-let btn = document.querySelectorAll("#delete-btn")[1];
+let deleteId;
 
 // Get the <span> element that closes the modal
 let modalClose = document.querySelector("#modal-cancel");
 let modalDelete = document.querySelector("#modal-delete");
 
-// When the user clicks on the button, open the modal
-btn.addEventListener('click', () => {
-  modal.style.display = "block";
+// Get the button that opens the modal
+let verts = document.querySelector('.vertical_box');
+
+verts.addEventListener('click', function (event) {
+  let selectedBtn = event.target.closest('.delete-btn');
+  console.log("Hello clicky", event.target);
+  if (event.target.id === "delete-btn") {
+    modal.style.display = "block";
+    deleteId = event.target.dataset.id;
+  }
+  // if(selectedBtn !== null) {
+  //   modal.style.display = "block";
+  // }
 });
 
 // When the user clicks on close, close the modal
@@ -32,8 +40,21 @@ modalClose.addEventListener('click', () => {
   modal.style.display = "none";
 });
 
-modalDelete.addEventListener('click', () => {
-  window.location.replace("./story_create.php");
+modalDelete.addEventListener('click', async (e) => {
+  // let deleteId = btn.dataset.id;
+  let theForm = document.querySelector(".story-delete");
+
+  const formData = new FormData();
+  formData.append("id", deleteId);
+
+  const response = await fetch("story_delete.php", {
+    method: "POST",
+    // Set the FormData instance as the request body
+    body: formData,
+  });
+
+  // formInput.value = deleteId;
+  window.location.replace("index_edit.php");
 });
 
 // When the user clicks anywhere outside of the modal, close it
