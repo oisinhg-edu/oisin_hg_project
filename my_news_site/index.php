@@ -6,7 +6,9 @@ try {
     // $stories = Story::findAll($options = array('limit' => 2));
     // $stories = Story::findAll($options = array('limit' => 2, 'offset' => 2));
 
-    $horizontal_stories = Story::findAll($options = array('limit' => 3, 'offset' => 1));
+    // $horizontal_stories = Story::findAll($options = array('order' => 'headline', 'limit' => 3, 'offset' => 1));
+
+    // $horizontal_stories = Story::findAllByDate($options = array('limit' => 3, 'offset' => 1));
 
     // $authorId = 7;
     // $stories = Story::findByAuthor($authorId);
@@ -18,12 +20,16 @@ try {
     // $stories = Story::findByCategory($categoryId, $options = array('limit' => 3));
     // $stories = Story::findByCategory($categoryId, $options = array('limit' => 3, 'offset' => 2));
 
-    $locationId = 2;
+    // $locationId = 2;
     // $stories = Story::findByLocation($locationId);
     // $stories = Story::findByLocation($locationId, $options = array('limit' => 3));
-    $stories = Story::findByLocation($locationId, $options = array('limit' => 4, 'offset' => 0));
 
-    $largeStory = Story::findById(1);
+    $stories = Story::findAllByDate($options = array('limit' => 8));
+
+    $largeStory = array_slice($stories, 0, 1)[0];
+    $med_stories = array_slice($stories, 4, 4);
+    $horizontal_stories = array_slice($stories, 1, 3);
+
 } catch (Exception $e) {
     echo $e->getMessage();
     exit();
@@ -87,7 +93,6 @@ try {
         <div class="width-5 vertical_box">
             <?php foreach ($horizontal_stories as $key => $s) { ?>
 
-
                 <div class="width-5 horizStory" onclick="location.href='story_view.php?id=<?= $s->id ?>';">
                     <span class="category space-mono-bold"><?= Category::findById($s->category_id)->name ?></span>
                     <div class="content">
@@ -108,7 +113,7 @@ try {
 
     <!-- row 2 -->
     <div class="container">
-        <?php foreach ($stories as $s) { ?>
+        <?php foreach ($med_stories as $s) { ?>
             <div class="width-3 mediumStory" onclick="location.href='story_view.php?id=<?= $s->id ?>';">
                 <div>
                     <img src="assets/images/<?= $s->img_url ?>" />

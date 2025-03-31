@@ -149,14 +149,15 @@ class Story
                     $sql .= " ORDER BY :order";
                     $params["order"] = $options["order"];
                 }
+                
                 if (array_key_exists("limit", $options)) {
                     $sql .= " LIMIT :limit";
-                    $params["limit"] = $options["limit"];
+                    $params["limit"] = $options["limit"];  
+                }
 
-                    if (array_key_exists("offset", $options)) {
-                        $sql .= " OFFSET :offset";
-                        $params["offset"] = $options["offset"];
-                    }
+                if (array_key_exists("offset", $options)) {
+                    $sql .= " OFFSET :offset";
+                    $params["offset"] = $options["offset"];
                 }
             }
 
@@ -227,6 +228,16 @@ class Story
         $params = [
             ":location_id" => $id
         ];
+
+        $stories = Story::find($sql, $params, $options);
+
+        return $stories;
+    }
+
+    public static function findAllByDate($options = NULL)
+    {
+        $sql = "SELECT * FROM stories ORDER BY created_at DESC";
+        $params = [];
 
         $stories = Story::find($sql, $params, $options);
 

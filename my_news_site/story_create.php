@@ -42,32 +42,32 @@ $locations = Location::findAll();
             <h2>Story Entry Form</h2>
             <form action="story_store.php" method="POST" enctype="multipart/form-data">
                 <p>
-                    Headline:
+                    <label for="headline">Headline:</label>
                     <input type="text" name="headline" value="<?= old('headline') ?>">
                 </p>
                 <span class="error"><?= error('headline') ?></span>
 
                 <p>
-                    Short Headline:
+                    <label for="short_headline">Short Headline:</label>
                     <input type="text" name="short_headline" value="<?= old('short_headline') ?>">
                 </p>
                 <span class="error"><?= error('short_headline') ?></span>
 
                 <p id="articleText">
-                    Article:
+                    <label for="article">Article:</label>
                     <textarea name="article"><?= old('article') ?></textarea>
                 </p>
                 <span class="error"><?= error('article') ?></span>
 
                 <p>
-                    Image URL:
-                    <!-- <input type="file" name="fileToUpload" id="fileToUpload"> -->
-                    <input type="text" name="img_url" value="<?= old('img_url') ?>">
+                    <label for='img_url'>Image:</label>
+                    <input type="file" id="img_url" name="img_url">
+                    <!-- <input type="text" name="img_url" value="<?= old('img_url') ?>"> -->
                 </p>
                 <span class="error"><?= error('img_url') ?></span>
 
                 <p>
-                    Author:
+                    <label for="author_id">Author:</label>
                     <select name="author_id">
                         <option value="">Please choose the author...</option>
                         <?php foreach ($authors as $author): ?>
@@ -80,7 +80,7 @@ $locations = Location::findAll();
                 <span class="error"><?= error('author_id') ?></span>
 
                 <p>
-                    Category:
+                    <label for="category_id">Category:</label>
                     <select name="category_id">
                         <option value="">Please choose the category...</option>
                         <?php foreach ($categories as $category): ?>
@@ -92,7 +92,7 @@ $locations = Location::findAll();
                 <span class="error"><?= error('category_id') ?></span>
 
                 <p>
-                    Location:
+                    <label for="location_id">Location:</label>
                     <select name="location_id">
                         <option value="">Please choose the location...</option>
                         <?php foreach ($locations as $location): ?>

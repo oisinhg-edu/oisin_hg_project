@@ -3,25 +3,31 @@
 class FormValidator
 {
     protected $data;
+    protected $files;
     protected $errors;
 
-    public function __construct($data = []) {
+    public function __construct($data = [], $files=[])
+    {
         $this->data = $data;
+        $this->files = $files;
         $this->errors = [];
     }
 
     //===============================================================================================
     // public methods
     //===============================================================================================
-    public function validate(){
+    public function validate()
+    {
         return count($this->errors) === 0;
     }
 
-    public function data() {
+    public function data()
+    {
         return $this->data;
     }
 
-    public function errors() {
+    public function errors()
+    {
         return $this->errors;
     }
 
@@ -160,10 +166,29 @@ class FormValidator
     protected function hasFile($key)
     {
         return
-            isset($_FILES) &&
-            is_array($_FILES) &&
-            array_key_exists($key, $_FILES) &&
-            $_FILES[$key]['error'] !== UPLOAD_ERR_NO_FILE;
+            isset($this->files) &&
+            is_array($this->files) &&
+            array_key_exists($key, $this->files) &&
+            $this->files[$key]['error'] !== UPLOAD_ERR_NO_FILE;
+    }
+    protected function hasFileType($key, $types)
+    {
+        $result = FALSE;
+        if (array_key_exists($key, $this->files)) {
+            $file = $this->files[$key];
+            $result = in_array($file['type'], $types);
+        }
+        return $result;
+    }
+
+    protected function hasFileSize($key, $maxSize)
+    {
+        $result = FALSE;
+        if (array_key_exists($key, $this->files)) {
+            $file = $this->files[$key];
+            $result = $file['size'] <= $maxSize;
+        }
+        return $result;
     }
 }
 ?>

@@ -2,7 +2,7 @@
 
 class DB {
     private $server = 'localhost';
-    private $database = 'news';
+    private $database = 'news_ohg';
     private $username = 'root';
     private $password = '';
 
