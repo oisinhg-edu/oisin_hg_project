@@ -2,29 +2,7 @@
 require_once "./etc/config.php";
 
 try {
-    // $stories = Story::findAll();
-    // $stories = Story::findAll($options = array('limit' => 2));
-    // $stories = Story::findAll($options = array('limit' => 2, 'offset' => 2));
-
-    // $horizontal_stories = Story::findAll($options = array('order' => 'headline', 'limit' => 3, 'offset' => 1));
-
-    // $horizontal_stories = Story::findAllByDate($options = array('limit' => 3, 'offset' => 1));
-
-    // $authorId = 7;
-    // $stories = Story::findByAuthor($authorId);
-    // $stories = Story::findByAuthor($authorId, $options = array('limit' => 3));
-    // $stories = Story::findByAuthor($authorId, $options = array('limit' => 3, 'offset' => 2));
-
-    // $categoryId = 4;
-    // $stories = Story::findByCategory($categoryId);
-    // $stories = Story::findByCategory($categoryId, $options = array('limit' => 3));
-    // $stories = Story::findByCategory($categoryId, $options = array('limit' => 3, 'offset' => 2));
-
-    // $locationId = 2;
-    // $stories = Story::findByLocation($locationId);
-    // $stories = Story::findByLocation($locationId, $options = array('limit' => 3));
-
-    $stories = Story::findAllByDate($options = array('limit' => 8));
+    $stories = Story::findAll($options = array('order' => 'created_at ', 'limit' => 8));
 
     $largeStory = array_slice($stories, 0, 1)[0];
     $med_stories = array_slice($stories, 4, 4);
@@ -96,7 +74,7 @@ try {
                 <div class="width-5 horizStory" onclick="location.href='story_view.php?id=<?= $s->id ?>';">
                     <span class="category space-mono-bold"><?= Category::findById($s->category_id)->name ?></span>
                     <div class="content">
-                        <h3 class="title lato-black"><?= $s->headline ?></h3>
+                        <h3 class="title lato-black"><?= $s->short_headline ?></h3>
                         <p class="author space-mono-regular">
                             <?= Author::findById($s->author_id)->first_name . " " . Author::findById($s->author_id)->last_name ?>
                         </p>
