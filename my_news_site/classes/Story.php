@@ -147,8 +147,9 @@ class Story
             if ($options != NULL && is_array($options)) {
                 if (array_key_exists("order", $options)) {
                     // $sql .= " ORDER BY :order";
-                    $sql .= " ORDER BY " . $options["order"];
                     // $params["order"] = $options["order"];
+                    
+                    $sql .= " ORDER BY " . $options["order"];
                 }
                 
                 if (array_key_exists("limit", $options)) {
