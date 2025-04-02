@@ -1,5 +1,4 @@
 .largeStory {
-    position: relative;
     display: flex;
     flex-direction: column;
 }
@@ -17,17 +16,27 @@
 }
 
 .largeStory .category {
-    top: 0;
+    top: -24px;
+    left: 0;
 }
 
 .largeStory .contentDiv {
-    position: absolute;
-    bottom: -100px;
+    position: relative;
     padding-left: 75px;
-    padding-top: 24px;
+    display: flex;
+    align-items: flex-end;
+    background-size: contain;
+    background-repeat: no-repeat;
+    height: 100%;
+}
+
+.largeStory .contentDiv:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    background-blend-mode: lighten;
 }
 
 .largeStory .content {
+    position: relative;
     background-color: #ffff;
     padding: 15px;
 }

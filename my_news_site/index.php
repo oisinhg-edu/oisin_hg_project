@@ -46,11 +46,11 @@ try {
     <!-- row 1 -->
     <div class="container">
         <div class="width-7 largeStory" onclick="location.href='story_view.php?id=<?= $largeStory->id ?>';">
-            <img src="assets/images/<?= $largeStory->img_url ?>">
 
-            <div class="contentDiv">
-                <span class="category space-mono-bold"><?= Category::findById($largeStory->category_id)->name ?></span>
+            <div class="contentDiv" style='background-image: url("images/<?= $largeStory->img_url ?>");'>
                 <div class="content">
+                    <span
+                        class="category space-mono-bold"><?= Category::findById($largeStory->category_id)->name ?></span>
                     <div class="text">
                         <h3 class="title lato-black"><?= $largeStory->headline ?></h3>
                         <p class="body"><?= substr($largeStory->article, 0, 155) ?>...</p>
@@ -84,7 +84,7 @@ try {
                         <img src="assets/images/<?= $s->img_url ?>">
                     </div>
                 </div>
-                
+
             <?php } ?> <!-- end php -->
         </div>
     </div> <!-- end row 1-->
