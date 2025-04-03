@@ -2,7 +2,7 @@
 require_once 'etc/global.php';
 require_once 'etc/config.php';
 
-const UPLOAD_DIR = "images";
+const UPLOAD_DIR = "assets/images";
 
 function makeParagraphs($text) {
     $sentences = explode("\n", $text);
@@ -18,7 +18,7 @@ try {
     if ($_SERVER["REQUEST_METHOD"] !== "POST") {
         throw new Exception("Invalid request method");
     }
-    $validator = new StoryFormValidator($_POST);
+    $validator = new StoryFormValidator($_POST, $_FILES);
     $valid = $validator->validate();
 
     if ($valid) {
@@ -29,9 +29,8 @@ try {
         $filepath = $img_file->move(UPLOAD_DIR, $filename);
 
         $data = $validator->data();
-        
         $story = new Story($data);
-        $story->img_url = $filepath;
+        $story->img_url = $filename;
         $story->save();
 
         redirect('index.php');

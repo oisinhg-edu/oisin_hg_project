@@ -171,6 +171,7 @@ class FormValidator
             array_key_exists($key, $this->files) &&
             $this->files[$key]['error'] !== UPLOAD_ERR_NO_FILE;
     }
+    
     protected function hasFileType($key, $types)
     {
         $result = FALSE;

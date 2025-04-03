@@ -2,7 +2,7 @@
 require_once "./etc/config.php";
 
 try {
-    $stories = Story::findAll($options = array('order' => 'created_at ', 'limit' => 8));
+    $stories = Story::findAll($options = array('order' => 'created_at DESC', 'limit' => 8));
 
     $largeStory = array_slice($stories, 0, 1)[0];
     $med_stories = array_slice($stories, 4, 4);
@@ -47,7 +47,7 @@ try {
     <div class="container">
         <div class="width-7 largeStory" onclick="location.href='story_view.php?id=<?= $largeStory->id ?>';">
 
-            <div class="contentDiv" style='background-image: url("images/<?= $largeStory->img_url ?>");'>
+            <div class="contentDiv" style='background-image: url("assets/images/<?= $largeStory->img_url ?>");'>
                 <div class="content">
                     <span
                         class="category space-mono-bold"><?= Category::findById($largeStory->category_id)->name ?></span>

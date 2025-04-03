@@ -2,9 +2,9 @@
 class StoryFormValidator extends FormValidator
 {
 
-    public function __construct($data = [])
+    public function __construct($data = [], $files=[])
     {
-        parent::__construct($data);
+        parent::__construct($data, $files);
     }
 
     public function validate()
