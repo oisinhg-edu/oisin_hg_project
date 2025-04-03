@@ -2,7 +2,7 @@
 require_once "./etc/config.php";
 
 try {
-    $stories = Story::findAll($options = array('order' => 'created_at ', 'limit' => 8));
+    $stories = Story::findAll($options = array('order' => 'created_at DESC', 'limit' => 8));
 
     $largeStory = array_slice($stories, 0, 1)[0];
     $med_stories = array_slice($stories, 4, 4);
@@ -47,7 +47,7 @@ try {
     <!-- row 1 -->
     <div class="container">
         <div class="width-7 largeStory">
-            <div class="contentDiv" style='background-image: url("images/<?= $largeStory->img_url ?>");'>
+            <div class="contentDiv" style='background-image: url("assets/images/<?= $largeStory->img_url ?>");'>
                 <div class="content">
                     <span
                         class="category space-mono-bold"><?= Category::findById($largeStory->category_id)->name ?></span>
@@ -86,7 +86,7 @@ try {
                     </div>
 
                     <div class="imageSection">
-                        <img src="images/<?= $s->img_url ?>">
+                        <img src="assets/images/<?= $s->img_url ?>">
                     </div>
                     <span id="actions">
                         <a href="story_edit.php?id=<?= $s->id ?>" class="edit"><button class="action-btn">Edit</button></a>
@@ -102,7 +102,7 @@ try {
         <?php foreach ($med_stories as $s) { ?>
             <div class="width-3 mediumStory">
                 <div>
-                    <img src="images/<?= $s->img_url ?>" />
+                    <img src="assets/images/<?= $s->img_url ?>" />
 
                     <div class="content">
                         <h3 class="title lato-black"><?= $s->headline ?></h3>

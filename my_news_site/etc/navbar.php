@@ -23,7 +23,7 @@ try {
                 <div class="dropdown-content">
                     <a href="story_create.php">Add Story</a>
                     <a href="index_edit.php">Edit Stories</a>
-                    <a href="images.php">Upload Image</a>
+                    <a href="story_table.php">View All</a>
                 </div>
             </div>
         </ul>
