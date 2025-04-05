@@ -30,7 +30,6 @@ $locations = Location::findAll();
     <link rel="stylesheet" href="css/grid.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/navbar.css">
-    <link rel="stylesheet" href="css/footer.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/table.css">
 </head>
@@ -38,46 +37,56 @@ $locations = Location::findAll();
 <body>
     <?php require_once "etc/navbar.php"; ?>
 
-    <table>
-        <thead>
-            <tr>
-                <th>Headline</th>
-                <th>Short Headline</th>
-                <th>Article</th>
-                <th>Image</th>
-                <th>Author</th>
-                <th>Category</th>
-                <th>Location</th>
-                <th>Creation Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            <?php foreach ($stories as $story): ?>
+    <div class="table-container">
+        <table>
+            <thead>
                 <tr>
-                    <td><a href="story_view.php?id=<?= $story->id ?>"><?= $story->headline ?></a></td>
-                    <td><?= $story->short_headline ?></td>
-                    <td><?= $story->article ?></td>
-                    <td><?= $story->img_url ?></td>
-                    <td>
-                        <?= $authors[$story->author_id]->first_name ?>
-                    </td>
-                    <td>
-                        <?= $categories[$story->category_id]->name ?>
-                    </td>
-                    <td>
-                        <?= $locations[$story->location_id]->name ?>
-                    </td>
-                    <td>
-                        <a href="story_edit.php?id=<?= $story->id ?>"><button>Edit</button></a>
-                        <form class="form-delete" action="story_delete.php" method="post">
-                            <input type="hidden" name="id" value="<?= $story->id ?>">
-                            <input type="submit" value="Delete">
-                        </form>
-                    </td>
+                    <th>Headline</th>
+                    <th>Short Headline</th>
+                    <th>Article</th>
+                    <th>Image</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Location</th>
+                    <th>Creation Date</th>
+                    <th>Actions</th>
                 </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <?php foreach ($stories as $story): ?>
+                    <tr>
+                        <td><a href="story_view.php?id=<?= $story->id ?>"><strong><?= $story->headline ?></a></td>
+                        <td><?= $story->short_headline ?></td>
+                        <td>
+                            <div style="height: 50px; overflow:hidden;">
+                                <?= $story->article ?>
+                            </div>
+                        </td>
+                        <td><?= $story->img_url ?></td>
+                        <td>
+                            <?= $authors[$story->author_id-1]->first_name ?>
+                        </td>
+                        <td>
+                            <?= $categories[$story->category_id-1]->name ?>
+                        </td>
+                        <td>
+                            <?= $locations[$story->location_id-1]->name ?>
+                        </td>
+                        <td>
+
+                        </td>
+                        <td>
+                            <a href="story_edit.php?id=<?= $story->id ?>"><button>Edit</button></a>
+                            <form class="form-delete" action="story_delete.php" method="post">
+                                <input type="hidden" name="id" value="<?= $story->id ?>">
+                                <input type="submit" value="Delete">
+                            </form>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </tbody>
+        </table>
+    </div>
 </body>
 
 </html>
