@@ -116,14 +116,7 @@ try {
         <?php } ?> <!-- end php -->
     </div> <!-- end row 2 -->
 
-    <div id="footer">
-        <div class="container-no-padding">
-            <span id="credit" class="width-12">
-                <p>© Oisin Healy Gelletlie 2025</p>
-                <a href="https://github.com/oisinhg-edu"><img src="assets/svg/github-mark.svg"></img></a>
-            </span>
-        </div>
-    </div>
+    <?php require_once "./etc/footer.php"; ?>
 </body>
 
 </html>

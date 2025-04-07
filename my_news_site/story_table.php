@@ -62,7 +62,7 @@ $locations = Location::findAll();
                         <td id="headline"><a href="story_view.php?id=<?= $story->id ?>"><strong><?= $story->headline ?></a></td>
                         <td><?= $story->short_headline ?></td>
                         <td>
-                            <div style="height: 50px; overflow:hidden;">
+                            <div style="max-height: 150px;">
                                 <?= $story->article ?>
                             </div>
                         </td>
