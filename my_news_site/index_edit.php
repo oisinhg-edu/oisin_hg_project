@@ -37,7 +37,7 @@ try {
     <link rel="stylesheet" href="css/fonts.css">
 
     <script defer src="js/app.js"></script>
-
+    <script defer src="js/modal.js"></script>
 </head>
 
 <body>
@@ -66,10 +66,7 @@ try {
                 <span id="actions">
                     <a href="story_edit.php?id=<?= $largeStory->id ?>" class="edit"><button
                             class="action-btn">Edit</button></a>
-                    <form class="story-delete" action="story_delete.php" method="POST">
-                        <input type="hidden" name="id" value="<?= $largeStory->id ?>">
-                        <input class="action-btn" id="delete-btn" type="submit" value="Delete">
-                    </form>
+                    <button class='action-btn' id="delete-btn" data-id="<?= $largeStory->id ?>">Delete</button>
                 </span>
             </div>
         </div>
@@ -121,10 +118,7 @@ try {
                 </div>
                 <span id="actions">
                     <a href="story_edit.php?id=<?= $s->id ?>" class="edit"><button class="action-btn">Edit</button></a>
-                    <form class="story-delete" action="story_delete.php" method="POST">
-                        <input type="hidden" name="id" value="<?= $s->id ?>">
-                        <input class="action-btn" id="delete-btn" type="submit" value="Delete">
-                    </form>
+                    <button class='action-btn' id="delete-btn" data-id="<?= $s->id ?>">Delete</button>
                 </span>
             </div>
         <?php } ?> <!-- end php -->
@@ -134,11 +128,12 @@ try {
     <div id="confirm" class="modal">
         <div class="modal-content">
             <p>Are you sure you want to delete this story?</p>
-
-            <button id="modal-cancel">Cancel</button>
-            <form class="story-delete" action="story_delete.php" method="POST">
-                <input type="button" id="modal-delete" value="Delete">
-            </form>
+            <span id="modal-actions">
+                <button id="modal-cancel">Cancel</button>
+                <form class="story-delete" action="story_delete.php" method="POST">
+                    <input type="button" id="modal-delete" value="Delete">
+                </form>
+            </span>
         </div>
     </div>
 </body>

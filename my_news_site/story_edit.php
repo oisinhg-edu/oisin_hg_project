@@ -54,39 +54,40 @@ try {
 <body>
     <?php require_once "etc/navbar.php"; ?>
 
-    <div class="container">
+    <div class="container story-form">
         <div class="content width-12">
             <h2>Story Edit Form</h2>
-            <form action="story_update.php" method="POST">
+            <form action="story_update.php" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="id" value="<?= $story->id ?>">
                 <p>
-                    Headline:
+                    <label for="headline">Headline:</label>
                     <input type="text" name="headline" value="<?= old('headline', $story->headline) ?>">
                 </p>
                 <span class="error"><?= error('headline') ?></span>
 
                 <p>
-                    Short Headline:
+                    <label for="short_headline">Short Headline:</label>
                     <input type="text" name="short_headline"
                         value="<?= old('short_headline', $story->short_headline) ?>">
                 </p>
                 <span class="error"><?= error('short_headline') ?></span>
 
                 <p id="articleText">
-                    Article:
+                    <label for="article">Article:</label>
                     <textarea name="article"><?= old('article', $story->article) ?></textarea>
                 </p>
                 <span class="error"><?= error('article') ?></span>
 
-                <p>
-                    Image URL:
-                    <!-- <input type="file" name="fileToUpload" id="fileToUpload"> -->
-                    <input type="text" name="img_url" value="<?= old('img_url', $story->img_url) ?>">
+                <p id="img-entry">
+                    <label for='img_url'>Image:</label>
+
+                    <img src="assets/images/<?= $story->img_url ?>">
+                    <input type="file" id="img_url" name="img_url">
                 </p>
                 <span class="error"><?= error('img_url') ?></span>
 
                 <p>
-                    Author:
+                    <label for="author_id">Author:</label>
                     <select name="author_id">
                         <option value="">Please choose the author...</option>
                         <?php foreach ($authors as $author): ?>
@@ -99,7 +100,7 @@ try {
                 <span class="error"><?= error('author_id') ?></span>
 
                 <p>
-                    Category:
+                    <label for="category_id">Category:</label>
                     <select name="category_id">
                         <option value="">Please choose the category...</option>
                         <?php foreach ($categories as $category): ?>
@@ -111,7 +112,7 @@ try {
                 <span class="error"><?= error('category_id') ?></span>
 
                 <p>
-                    Location:
+                    <label for="location_id">Location:</label>
                     <select name="location_id">
                         <option value="">Please choose the location...</option>
                         <?php foreach ($locations as $location): ?>
@@ -125,7 +126,7 @@ try {
                 <span class="error"><?= error('created_at') ?></span>
 
                 <p id="control-btns">
-                    <a href="index_edit.php"><button type="button">Cancel</button></a>
+                    <a href="story_table.php"><button type="button">Cancel</button></a>
                     <button type="submit">Submit</button>
                 </p>
             </form>

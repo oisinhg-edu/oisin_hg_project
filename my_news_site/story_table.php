@@ -32,6 +32,10 @@ $locations = Location::findAll();
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/fonts.css">
     <link rel="stylesheet" href="css/table.css">
+    <link rel="stylesheet" href="css/modal.css">
+
+    <script defer src="js/app.js"></script>
+    <script defer src="js/modal.js"></script>
 </head>
 
 <body>
@@ -55,37 +59,48 @@ $locations = Location::findAll();
             <tbody>
                 <?php foreach ($stories as $story): ?>
                     <tr>
-                        <td><a href="story_view.php?id=<?= $story->id ?>"><strong><?= $story->headline ?></a></td>
+                        <td id="headline"><a href="story_view.php?id=<?= $story->id ?>"><strong><?= $story->headline ?></a></td>
                         <td><?= $story->short_headline ?></td>
                         <td>
                             <div style="height: 50px; overflow:hidden;">
                                 <?= $story->article ?>
                             </div>
                         </td>
-                        <td><?= $story->img_url ?></td>
+                        <td><img src="assets/images/<?= $story->img_url ?>"></td>
                         <td>
-                            <?= $authors[$story->author_id-1]->first_name ?>
+                            <?= $authors[$story->author_id - 1]->first_name ?>
+                            <?= $authors[$story->author_id - 1]->last_name ?>
                         </td>
                         <td>
-                            <?= $categories[$story->category_id-1]->name ?>
+                            <?= $categories[$story->category_id - 1]->name ?>
                         </td>
                         <td>
-                            <?= $locations[$story->location_id-1]->name ?>
+                            <?= $locations[$story->location_id - 1]->name ?>
                         </td>
                         <td>
-
+                            <?= $story->created_at ?>
                         </td>
                         <td>
                             <a href="story_edit.php?id=<?= $story->id ?>"><button>Edit</button></a>
-                            <form class="form-delete" action="story_delete.php" method="post">
-                                <input type="hidden" name="id" value="<?= $story->id ?>">
-                                <input type="submit" value="Delete">
-                            </form>
+                            <button class='action-btn' id="delete-btn" data-id="<?= $story->id ?>">Delete</button>
                         </td>
                     </tr>
                 <?php endforeach; ?>
             </tbody>
         </table>
+    </div>
+
+    <!-- confirmation box-->
+    <div id="confirm" class="modal">
+        <div class="modal-content">
+            <p>Are you sure you want to delete this story?</p>
+            <span id="modal-actions">
+                <button id="modal-cancel">Cancel</button>
+                <form class="story-delete" action="story_delete.php" method="POST">
+                    <input type="button" id="modal-delete" value="Delete">
+                </form>
+            </span>
+        </div>
     </div>
 </body>
 
