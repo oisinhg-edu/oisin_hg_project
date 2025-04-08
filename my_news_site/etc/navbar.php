@@ -21,11 +21,12 @@ try {
                 </li>
 
                 <div class="dropdown-content">
+                    <a href="login.php">Login</a>
                     <a href="story_create.php">Add Story</a>
-                    <a href="index_edit.php">Edit Stories</a>
+                    <!-- <button id="toggle-edit">Edit Stories</button> -->
                     <a href="story_table.php">View All</a>
+                    </di>
                 </div>
-            </div>
         </ul>
     </div>
 </div>

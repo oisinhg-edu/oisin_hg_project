@@ -8,7 +8,11 @@ try {
     $med_stories = array_slice($stories, 4, 4);
     $horizontal_stories = array_slice($stories, 1, 3);
 
-    // getting time difference for main story
+    $film_stories = Story::findByCategory(5, $options = array('limit' => 4));
+
+    $gaming_stories = Story::findByCategory(4, $options = array('limit' => 4));
+
+    // getting time difference for main story 
     date_default_timezone_set("Europe/Dublin");
 
     $updatedTime = $largeStory->updated_at;
@@ -60,21 +64,23 @@ try {
     <link rel="stylesheet" href="css/largeStory.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/modal.css">
     <link rel="stylesheet" href="css/fonts.css">
 
     <script defer src="js/app.js"></script>
-
+    <script defer src="js/modal.js"></script>
 </head>
 
 <body>
+    <?php require "./etc/login_status.php"; ?>
     <?php require_once "./etc/navbar.php"; ?>
     <?php require_once "./etc/flash_message.php"; ?>
 
     <!-- block 1 -->
-    <div class="container">
+    <div class="container story-block">
         <h1 class="width-12 block-title">Recent Stories</h1>
 
-        <div class="width-7 largeStory" onclick="location.href='story_view.php?id=<?= $largeStory->id ?>';">
+        <div class="width-7 largeStory story" data-id="<?= $largeStory->id ?>">
 
             <div class="contentDiv" style='background-image: url("assets/images/<?= $largeStory->img_url ?>");'>
                 <div class="content">
@@ -93,14 +99,20 @@ try {
                         </p>
                     </div>
                 </div>
-            </div>
 
+                <span class="actions">
+                    <a href="story_edit.php?id=<?= $largeStory->id ?>" class="edit"><button
+                            class="action-btn">Edit</button></a>
+                    <button class='action-btn' id="delete-btn" data-id="<?= $largeStory->id ?>">Delete</button>
+                </span>
+
+            </div>
         </div>
 
         <div class="width-5 vertical_box">
             <?php foreach ($horizontal_stories as $key => $s) { ?>
 
-                <div class="width-5 horizStory" onclick="location.href='story_view.php?id=<?= $s->id ?>';">
+                <div class="width-5 horizStory story" data-id="<?= $s->id ?>">
                     <span class="category space-mono-bold"><?= Category::findById($s->category_id)->name ?></span>
                     <div class="content">
                         <h3 class="title lato-black"><?= $s->short_headline ?></h3>
@@ -112,13 +124,17 @@ try {
                     <div class="imageSection">
                         <img src="assets/images/<?= $s->img_url ?>">
                     </div>
-                </div>
 
+                    <span class="actions">
+                        <a href="story_edit.php?id=<?= $s->id ?>" class="edit"><button class="action-btn">Edit</button></a>
+                        <button class='action-btn' id="delete-btn" data-id="<?= $s->id ?>">Delete</button>
+                    </span>
+                </div>
             <?php } ?> <!-- end php -->
         </div>
 
         <?php foreach ($med_stories as $s) { ?>
-            <div class="width-3 mediumStory" onclick="location.href='story_view.php?id=<?= $s->id ?>';">
+            <div class="width-3 mediumStory story" data-id="<?= $s->id ?>">
                 <div>
                     <img src="assets/images/<?= $s->img_url ?>" />
 
@@ -137,21 +153,92 @@ try {
                     </p>
                     <p class="date space-mono-bold"><?= $s->created_at ?></p>
                 </div>
-            </div>
 
+                <span class="actions">
+                    <a href="story_edit.php?id=<?= $s->id ?>" class="edit"><button class="action-btn">Edit</button></a>
+                    <button class='action-btn' id="delete-btn" data-id="<?= $s->id ?>">Delete</button>
+                </span>
+            </div>
         <?php } ?> <!-- end php -->
     </div>
 
     <!-- block 2 -->
-    <div class="container">
+    <div class="container story-block">
         <h1 class="width-12 block-title">Film</h1>
+        <?php foreach ($film_stories as $s) { ?>
+            <div class="width-3 mediumStory story" data-id="<?= $s->id ?>">
+                <div>
+                    <img src="assets/images/<?= $s->img_url ?>" />
+
+                    <div class="content">
+                        <h3 class="title lato-black"><?= $s->headline ?></h3>
+                        <?= substr($s->article, 0, 175) ?>...
+                    </div>
+
+                    <span class="category space-mono-bold"><?= Category::findById($s->category_id)->name ?></span>
+                </div>
+
+                <div>
+                    <!-- <p>Location: <?= Location::findById($s->location_id)->name ?></p> -->
+                    <p class="author space-mono-regular">
+                        <?= Author::findById($s->author_id)->first_name . " " . Author::findById($s->author_id)->last_name ?>
+                    </p>
+                    <p class="date space-mono-bold"><?= $s->created_at ?></p>
+                </div>
+
+                <span class="actions">
+                    <a href="story_edit.php?id=<?= $s->id ?>" class="edit"><button class="action-btn">Edit</button></a>
+                    <button class='action-btn' id="delete-btn" data-id="<?= $s->id ?>">Delete</button>
+                </span>
+            </div>
+        <?php } ?> <!-- end php -->
     </div>
 
     <!-- block 3 -->
-    <div class="container">
+    <div class="container story-block">
         <h1 class="width-12 block-title">Gaming</h1>
+        <?php foreach ($gaming_stories as $s) { ?>
+            <div class="width-3 mediumStory story" data-id="<?= $s->id ?>">
+                <div>
+                    <img src="assets/images/<?= $s->img_url ?>" />
+
+                    <div class="content">
+                        <h3 class="title lato-black"><?= $s->headline ?></h3>
+                        <?= substr($s->article, 0, 175) ?>...
+                    </div>
+
+                    <span class="category space-mono-bold"><?= Category::findById($s->category_id)->name ?></span>
+                </div>
+
+                <div>
+                    <!-- <p>Location: <?= Location::findById($s->location_id)->name ?></p> -->
+                    <p class="author space-mono-regular">
+                        <?= Author::findById($s->author_id)->first_name . " " . Author::findById($s->author_id)->last_name ?>
+                    </p>
+                    <p class="date space-mono-bold"><?= $s->created_at ?></p>
+                </div>
+
+                <span class="actions">
+                    <a href="story_edit.php?id=<?= $s->id ?>" class="edit"><button class="action-btn">Edit</button></a>
+                    <button class='action-btn' id="delete-btn" data-id="<?= $s->id ?>">Delete</button>
+                </span>
+            </div>
+        <?php } ?> <!-- end php -->
     </div>
     <?php require_once "./etc/footer.php"; ?>
+
+    <!-- confirmation box-->
+    <div id="confirm" class="modal">
+        <div class="modal-content">
+            <p>Are you sure you want to delete this story?</p>
+            <span id="modal-actions">
+                <button id="modal-cancel">Cancel</button>
+                <form class="story-delete" action="story_delete.php" method="POST">
+                    <input type="button" id="modal-delete" value="Delete">
+                </form>
+            </span>
+        </div>
+    </div>
 </body>
 
 </html>
