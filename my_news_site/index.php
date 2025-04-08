@@ -8,6 +8,33 @@ try {
     $med_stories = array_slice($stories, 4, 4);
     $horizontal_stories = array_slice($stories, 1, 3);
 
+    // getting time difference for main story
+    date_default_timezone_set("Europe/Dublin");
+
+    $updatedTime = $largeStory->updated_at;
+    $currentTime = date("Y-m-d H:i:s");
+
+    $date1 = new DateTime($updatedTime);
+    $date2 = new DateTime($currentTime);
+    $interval = $date1->diff($date2);
+
+    $timeDiff = '';
+    if ($interval->d != 0) {
+        $timeDiff = $timeDiff . $interval->days . ' days ';
+    }
+    if ($interval->h == 1) {
+        $timeDiff = $timeDiff . $interval->h . ' hour ';
+    } else if ($interval->h != 0) {
+        $timeDiff = $timeDiff . $interval->h . ' hours ';
+    }
+    if ($interval->i == 1) {
+        $timeDiff = $timeDiff . $interval->i . ' min ';
+    } else if ($interval->i != 0) {
+        $timeDiff = $timeDiff . $interval->i . ' mins ';
+    } else {
+        $timeDiff = $timeDiff . $interval->s . ' seconds ';
+    }
+
 } catch (Exception $e) {
     echo $e->getMessage();
     exit();
@@ -43,8 +70,10 @@ try {
     <?php require_once "./etc/navbar.php"; ?>
     <?php require_once "./etc/flash_message.php"; ?>
 
-    <!-- row 1 -->
+    <!-- block 1 -->
     <div class="container">
+        <h1 class="width-12 block-title">Recent Stories</h1>
+
         <div class="width-7 largeStory" onclick="location.href='story_view.php?id=<?= $largeStory->id ?>';">
 
             <div class="contentDiv" style='background-image: url("assets/images/<?= $largeStory->img_url ?>");'>
@@ -59,14 +88,14 @@ try {
                         <p class="author space-mono-regular">
                             <?= Author::findById($largeStory->author_id)->first_name . " " . Author::findById($largeStory->author_id)->last_name ?>
                         </p>
-                        <p class="date space-mono-bold"><?= $largeStory->created_at ?></p>
+                        <p class="date space-mono-bold"><?= substr($largeStory->created_at, 0, 10) ?> Updated:
+                            <?= $timeDiff ?> ago
+                        </p>
                     </div>
                 </div>
             </div>
 
         </div>
-
-
 
         <div class="width-5 vertical_box">
             <?php foreach ($horizontal_stories as $key => $s) { ?>
@@ -87,10 +116,7 @@ try {
 
             <?php } ?> <!-- end php -->
         </div>
-    </div> <!-- end row 1-->
 
-    <!-- row 2 -->
-    <div class="container">
         <?php foreach ($med_stories as $s) { ?>
             <div class="width-3 mediumStory" onclick="location.href='story_view.php?id=<?= $s->id ?>';">
                 <div>
@@ -114,8 +140,17 @@ try {
             </div>
 
         <?php } ?> <!-- end php -->
-    </div> <!-- end row 2 -->
+    </div>
 
+    <!-- block 2 -->
+    <div class="container">
+        <h1 class="width-12 block-title">Film</h1>
+    </div>
+
+    <!-- block 3 -->
+    <div class="container">
+        <h1 class="width-12 block-title">Gaming</h1>
+    </div>
     <?php require_once "./etc/footer.php"; ?>
 </body>
 
