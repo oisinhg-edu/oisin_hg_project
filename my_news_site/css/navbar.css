@@ -31,7 +31,8 @@
 
 .dropdown {
     position: relative;
-    display: inline-block;
+    display: none;
+    /* display: inline-block; */
 }
 
 .dropdown-content {
@@ -76,4 +77,8 @@
 
 .show {
     display: block
+}
+
+#login-li {
+    display: none;
 }

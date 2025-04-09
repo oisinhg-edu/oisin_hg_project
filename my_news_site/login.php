@@ -12,28 +12,42 @@ if (session_status() === PHP_SESSION_NONE) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Login</title>
+    <link rel="stylesheet" href="css/login.css">
 
     <script defer src="js/app.js"></script>
+
+
+    <title>Admin Login</title>
 </head>
 
 <body>
-    <form action="login_check.php" method="POST">
-        <p>
-            <label for="username">Username: </label>
-            <input type="text" name="username" value="<?= old('username') ?>">
-            <span class="error"><?= error('username') ?></span>
-        </p>
 
-        <p>
-            <label for="password">Password: </label>
-            <input type="password" name="password">
-            <span class="error"><?= error('password') ?></span>
-        </p>
+    <div class="container">
+        <div class="form-content">
+            <p>Sign in to edit and add stories. <br>(admin for both)</p>
+            <form action="login_check.php" method="POST">
+                <p>
+                    <label for="username">Username: </label>
+                    <input type="text" name="username" value="<?= old('username') ?>">
+                </p>
+                <span class="error"><?= error('username') ?></span>
 
-        <a href="index.php"><button type="button">Cancel</button></a>
-        <button>Login</button>
-    </form>
+                <p>
+                    <label for="password">Password: </label>
+                    <input type="password" name="password">
+                </p>
+                <span class="error"><?= error('password') ?></span>
+               
+                <span>
+                    <a href="index.php"><button type="button">Cancel</button></a>
+                    <button>Login</button>
+                </span>
+            </form>
+        </div>
+
+    </div>
+
+
 </body>
 
 </html>

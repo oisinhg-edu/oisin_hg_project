@@ -78,7 +78,7 @@ try {
 
     <!-- block 1 -->
     <div class="container story-block">
-        <h1 class="width-12 block-title">Recent Stories</h1>
+        <h1 class="width-12 cat-head">Recent Stories</h1>
 
         <div class="width-7 largeStory story" data-id="<?= $largeStory->id ?>">
 
@@ -164,7 +164,7 @@ try {
 
     <!-- block 2 -->
     <div class="container story-block">
-        <h1 class="width-12 block-title">Film</h1>
+        <h1 class="width-12 cat-head">Film</h1>
         <?php foreach ($film_stories as $s) { ?>
             <div class="width-3 mediumStory story" data-id="<?= $s->id ?>">
                 <div>
@@ -196,7 +196,7 @@ try {
 
     <!-- block 3 -->
     <div class="container story-block">
-        <h1 class="width-12 block-title">Gaming</h1>
+        <h1 class="width-12 cat-head">Gaming</h1>
         <?php foreach ($gaming_stories as $s) { ?>
             <div class="width-3 mediumStory story" data-id="<?= $s->id ?>">
                 <div>
@@ -227,18 +227,7 @@ try {
     </div>
     <?php require_once "./etc/footer.php"; ?>
 
-    <!-- confirmation box-->
-    <div id="confirm" class="modal">
-        <div class="modal-content">
-            <p>Are you sure you want to delete this story?</p>
-            <span id="modal-actions">
-                <button id="modal-cancel">Cancel</button>
-                <form class="story-delete" action="story_delete.php" method="POST">
-                    <input type="button" id="modal-delete" value="Delete">
-                </form>
-            </span>
-        </div>
-    </div>
+    <?php require_once "./etc/deleteConfirmationModal.php"; ?>
 </body>
 
 </html>

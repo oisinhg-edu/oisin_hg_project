@@ -11,7 +11,11 @@ try {
         throw new Exception("Story not found.");
     }
     $category = Category::findById($s->category_id);
+
     $related_stories = Story::findByCategory($category->id, $options = array('limit' => 3, 'order_by' => 'updated_at DESC'));
+
+    $readableDate = date("jS F Y H:i", strtotime($s->updated_at));
+
 } catch (Exception $e) {
     echo $e->getMessage();
     exit();
@@ -32,45 +36,74 @@ try {
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/navbar.css">
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="css/view.css">
+    <link rel="stylesheet" href="css/fonts.css">
 
-    <title>Story</title>
+    <script defer src="js/app.js"></script>
+    <script defer src="js/modal.js"></script>
+
+    <title><?= $s->short_headline ?></title>
 </head>
 
 <body>
+    <?php require "./etc/login_status.php"; ?>
     <?php require_once "etc/navbar.php"; ?>
     <?php require_once "etc/flash_message.php"; ?>
-    <div>
-        <h1><?= $s->headline ?></h1>
-        <div>
-            <p><?= $s->article ?></p>
+
+    <div class="container">
+        <div class="main-story width-12">
+            <div id="pre-headline">
+                <span class="category space-mono-bold"><?= Category::findById($s->category_id)->name ?></span>
+
+                <p class="author space-mono-bold">
+                    <?= Author::findById($s->author_id)->first_name . " " . Author::findById($s->author_id)->last_name ?>
+                </p>
+
+                <p class="space-mono-regular"><?= $readableDate ?></p>
+            </div>
+
+            <h1 class="headline pt-serif-bold"><?= $s->headline ?></h1>
+
+            <p><img src="assets/images/<?= $s->img_url ?>" id='main-img' /></p>
+
+            <p class="space-mono-bold location"><?= Location::findById($s->location_id)->name ?></p>
+
+            <div class=" article-text lato-regular">
+                <?= $s->article ?>
+            </div>
         </div>
-        <p><img src="assets/images/<?= $s->img_url ?>" /></p>
-        <p>Author: <?= Author::findById($s->author_id)->first_name . " " . Author::findById($s->author_id)->last_name ?>
-        </p>
-        <p>Category: <?= Category::findById($s->category_id)->name ?></p>
-        <p>Location: <?= Location::findById($s->location_id)->name ?></p>
-        <p>Date created: <?= $s->created_at ?></p>
-        <p>Last modified: <?= $s->updated_at ?></p>
     </div>
-    <div>
-        <h2>Related Stories</h2>
+
+    <div class="container">
+        <div class="width-12 relCat">
+            <h2 class="cat-head">More <?= Category::findById($s->category_id)->name ?> Stories</h2>
+        </div>
+
+
         <?php foreach ($related_stories as $rs) { ?>
             <?php if ($rs->id == $s->id) {
                 continue;
             } ?>
-            <div>
-                <h3><a href="story_view.php?id=<?= $rs->id ?>"><?= $rs->headline ?></a></h3>
-                <p>Author:
-                    <?= Author::findById($rs->author_id)->first_name . " " . Author::findById($rs->author_id)->last_name ?>
-                </p>
-                <!-- <p>Category: <?= Category::findById($rs->category_id)->name ?></p> -->
-                <!-- <p>Location: <?= Location::findById($rs->location_id)->name ?></p> -->
-                <!-- <p>Date created: <?= $rs->created_at ?></p> -->
-                <p>Last modified: <?= $rs->updated_at ?></p>
+            <div class="width-4 relatedStory">
+                <h3 class="lato-bold">
+                    <a href="story_view.php?id=<?= $rs->id ?>"><?= $rs->headline ?></a>
+                </h3>
+
+                <div>
+                    <a href="story_view.php?id=<?= $rs->id ?>">
+                        <p class="space-mono-bold">
+                            <?= Author::findById($rs->author_id)->first_name . " " . Author::findById($rs->author_id)->last_name ?>
+                        </p>
+
+                        <p>Updated: <?= $rs->updated_at ?></p>
+
+                        <img src="assets/images/<?= $rs->img_url ?>">
+                    </a>
+                </div>
             </div>
         <?php } ?>
-
-        <?php require_once "./etc/footer.php"; ?>
+    </div>
+    <?php require_once "./etc/footer.php"; ?>
 </body>
 
 </html>

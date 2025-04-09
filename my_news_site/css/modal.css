@@ -30,6 +30,15 @@
     color: #575656;
     font-size: 18px;
     font-weight: bold;
+    cursor: pointer;
+}
+
+#modal-delete {
+    padding: 4px 10px;
+    color: #575656;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
 }
 
 #modal-actions {

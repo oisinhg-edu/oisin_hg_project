@@ -92,23 +92,22 @@
     font-family: "PT Serif", serif;
     font-weight: 400;
     font-style: normal;
-  }
-  
-  .pt-serif-bold {
+}
+
+.pt-serif-bold {
     font-family: "PT Serif", serif;
     font-weight: 700;
     font-style: normal;
-  }
-  
-  .pt-serif-regular-italic {
+}
+
+.pt-serif-regular-italic {
     font-family: "PT Serif", serif;
     font-weight: 400;
     font-style: italic;
-  }
-  
-  .pt-serif-bold-italic {
+}
+
+.pt-serif-bold-italic {
     font-family: "PT Serif", serif;
     font-weight: 700;
     font-style: italic;
-  }
-  
+}

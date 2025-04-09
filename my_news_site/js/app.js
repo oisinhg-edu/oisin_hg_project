@@ -4,16 +4,22 @@ const dropdownBtn = document.querySelector("#dropbtn");
 let editBtn = document.querySelector('#toggle-edit');
 let actionDiv = document.querySelectorAll('.actions');
 
-localStorage.setItem("isAdmin", false);
+let adminPanel = document.querySelector('.dropdown');
+let loginBtn = document.querySelector('#login-li');
 
-let isAdmin = localStorage.getItem('isAdmin');
+console.log(document.querySelector('#login_status').value);
 
-console.log(isAdmin);
+if (document.querySelector('#login_status').value == 'true') {
+  loginBtn.style.display = 'none';
+  adminPanel.style.display = 'inline-block';
 
-if (isAdmin === 'true') {
   actionDiv.forEach((actions) => {
     actions.style.display = 'flex';
   });
+}
+else {
+  adminPanel.style.display = 'none';
+  loginBtn.style.display = 'block';
 }
 
 document.addEventListener("click", e => {
@@ -26,18 +32,11 @@ document.addEventListener("click", e => {
   }
 });
 
-// console.log(actionDiv);
-
-// editBtn.addEventListener('click', () => {
-//   window.location.href
-// });
-
 document.addEventListener('click', event => {
   let selectedStoryDiv = event.target.closest('.story');
 
   if (selectedStoryDiv !== null && event.target !== selectedStoryDiv.querySelector('#delete-btn')) {
-    console.log('clicked');
-    storyId = selectedStoryDiv.dataset.id;
+    let storyId = selectedStoryDiv.dataset.id;
     console.log(event.target);
 
     window.location.href = `story_view.php?id=${storyId}`;

@@ -7,7 +7,6 @@ let deleteId;
 let modalClose = document.querySelector("#modal-cancel");
 let modalDelete = document.querySelector("#modal-delete");
 
-
 document.addEventListener('click', function (event) {
     if (event.target.id === "delete-btn") {
         modal.style.display = "block";

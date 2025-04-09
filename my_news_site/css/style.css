@@ -25,12 +25,6 @@ body {
     border-top: 4px dotted #a3a3a3;
 }
 
-.block-title {
-    text-decoration: underline;
-    text-decoration-color: #8B0000;
-    text-decoration-skip-ink: auto;
-}
-
 .container {
     position: relative;
 }
@@ -69,4 +63,9 @@ body {
 
 #delete-btn:hover {
     background-color: #a82020;
+}
+
+.cat-head {
+    text-decoration: underline;
+    text-decoration-color: #8b0000;
 }
